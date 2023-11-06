@@ -17,7 +17,7 @@ class PermissionPolicy
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function viewAny(User $user) {
-        return $user->hasAnyRole(['super-admin', 'admin', 'moderator']);
+        return $user->can('List permissions');
     }
 
     /**
@@ -27,7 +27,7 @@ class PermissionPolicy
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function create(User $user) {
-        return $user->hasAnyRole(['super-admin', 'admin']);
+        return $user->can('Create permission');
     }
 
     /**
@@ -38,7 +38,7 @@ class PermissionPolicy
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(User $user, Permission $permission) {
-        return $user->hasAnyRole(['super-admin', 'admin']);
+        return $user->can('Update permission');
     }
 
     /**
@@ -49,6 +49,6 @@ class PermissionPolicy
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function delete(User $user, Permission $permission) {
-        return $user->hasAnyRole(['super-admin', 'admin']);
+        return $user->can('Delete permission');
     }
 }
